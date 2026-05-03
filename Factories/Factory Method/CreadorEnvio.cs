@@ -1,5 +1,3 @@
-public abstract class CreadorEnvio
-{
-    public abstract Envio CrearEnvio(string tipoCarga);
-
+public abstract class CreadorEnvio {
+    public abstract Envio CrearEnvio();
 }
