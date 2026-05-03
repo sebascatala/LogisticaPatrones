@@ -1,31 +1,55 @@
-public class Director:ManejadorIncidencia
+public class Director : ManejadorIncidencia
 {
-    public void generarOrden(string tipoCarga)
+    private IOrdenBuilder _builder;
+
+    public void SetBuilder(IOrdenBuilder builder)
     {
-        switch(tipoCarga.ToLower())
+        _builder = builder;
+    }
+
+    public OrdenDespacho generarOrden(string tipoCarga, double peso, string dimensiones)
+    {
+        CreadorEnvio creador = SeleccionarCreador(tipoCarga);
+        Envio nuevoEnvio = creador.CrearEnvio();
+
+        nuevoEnvio.peso = peso;
+        nuevoEnvio.dimensiones = dimensiones;
+
+        _builder.generarId();
+        _builder.añadirDescripcion();
+        _builder.añadirDocumentacionAduanera();
+        _builder.añadirSeguroTransito();
+
+        OrdenDespacho ordenFinal = _builder.obtenerOrden();
+
+        if (nuevoEnvio is EnvioRefrigerado refrigerado)
         {
-            case"estandar":
-            creador = new CreadorEstandar();
-            break;
-            case"refrigerado":
-            creador = new CreadorRefrigerado();
-            break;
-            case"valor declarado":
-            creador = new CreadorValorDeclarado();
-            break;
-            default:
-            throw new Exception("Tipo de envio no soportado");
+            ordenFinal.asignarInstruccion($"MANTENER FRÍO: {refrigerado.temperaturaConservacion}°C");
+        }
+
+        return ordenFinal;
+    }
+
+    private CreadorEnvio SeleccionarCreador(string tipo)
+    {
+        switch (tipo.ToLower())
+        {
+            case "estandar": return new CreadorEstandar();
+            case "refrigerado": return new CreadorRefrigerado();
+            case "valor declarado": return new CreadorValorDeclarado();
+            default: throw new Exception("Tipo no válido");
         }
     }
+
     public override void Manejar(Incidencia incidencia)
     {
-        if(Incidencia.Nivel <=3)
+        if (incidencia.Nivel <= 3)
         {
             Console.WriteLine("Director resolvió: " + incidencia.Descripcion);
         }
         else
         {
-            Console.WriteLine("Incidencia Critica: requiere otro nivel " );
+            Console.WriteLine("Incidencia crítica: requiere otro nivel");
         }
     }
 }
