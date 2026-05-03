@@ -1,5 +1,5 @@
 public abstract class Envio
 {
-    public double peso;
-    public string dimensiones;
+    public double peso = 0.0;
+    public string dimensiones = string.Empty;
 }
