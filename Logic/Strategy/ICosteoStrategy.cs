@@ -6,5 +6,6 @@ namespace LogisticaPatrones.Logic.Strategy
 {
     internal interface ICosteoStrategy
     {
+        double Calcular(Envio envio);
     }
 }

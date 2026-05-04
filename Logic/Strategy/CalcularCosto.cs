@@ -8,6 +8,7 @@ namespace LogisticaPatrones.Logic.Strategy
     {
         private ICosteoStrategy _estrategia;
 
+        //referencia a envio
         public void SetEstrategia(ICosteoStrategy estrategia)
         {
             _estrategia = estrategia;
