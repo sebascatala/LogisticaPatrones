@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LogisticaPatrones.Logic.Strategy
+﻿class EstrategiaEstandar : ICosteoStrategy
 {
-    internal class EstrategiaEstandar : ICosteoStrategy
+    public double Calcular(Envio envio)
     {
-        public double Calcular(Envio envio)
-        {
-            double tarifaKm = 0.5;
-            double costoPeso = envio.Peso * 2;
+        double tarifaKm = 0.5;
+        double costoPeso = envio.peso * 2;
 
-            return (envio.Distancia * tarifaKm) + costoPeso;
-        }
+        return (envio.distancia * tarifaKm) + costoPeso;
     }
 }

@@ -77,4 +77,5 @@ coordinador.Manejar(incidencia2);
 coordinador.Manejar(incidencia3);
 coordinador.Manejar(incidencia4);
 
+
 Console.WriteLine("\n=== FIN DEL PROGRAMA ===");
