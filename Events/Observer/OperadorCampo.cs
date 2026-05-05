@@ -2,7 +2,7 @@ public class OperadorCampo : IOperador
 {
     private string nombre;
 
-    public string OperadorCampo(string nombre)
+    public  OperadorCampo(string nombre)
     {
         this.nombre = nombre;
     }

@@ -1,20 +1,80 @@
-﻿
+﻿Console.WriteLine("=== SISTEMA LOGÍSTICA PATRONES ===\n");
 
-//PRUEBAS COMPOSITE
-using LogisticaPatrones.Logic.Composite;
+// ===============================
+// FACTORY METHOD
+// ===============================
+Console.WriteLine("=== FACTORY METHOD ===");
 
-var tramo1 = new TramaDirecta("A-B", 100, 2);
-var tramo2 = new TramaDirecta("B-C", 150, 3);
-var tramo3 = new TramaDirecta("C-D", 80, 1.5);
+CreadorEnvio creadorEstandar = new CreadorEstandar();
+Envio envioEstandar = creadorEstandar.CrearEnvio();
+Console.WriteLine("Envío creado: " + envioEstandar.GetType().Name);
 
-var rutaPrincipal = new RutaCompuesta("Ruta Principal");
-rutaPrincipal.AñadirTramo(tramo1);
-rutaPrincipal.AñadirTramo(tramo2);
+CreadorEnvio creadorRefrigerado = new CreadorRefrigerado();
+Envio envioRefrigerado = creadorRefrigerado.CrearEnvio();
+Console.WriteLine("Envío creado: " + envioRefrigerado.GetType().Name);
 
-var rutaSecundaria = new RutaCompuesta("Ruta Secundaria");
-rutaSecundaria.AñadirTramo(tramo3); 
-rutaPrincipal.AñadirTramo(rutaSecundaria);
+CreadorEnvio creadorValor = new CreadorValorDeclarado();
+Envio envioValor = creadorValor.CrearEnvio();
+Console.WriteLine("Envío creado: " + envioValor.GetType().Name);
 
-Console.WriteLine($"Ruta: {rutaPrincipal.Nombre}");
-Console.WriteLine("Costo total: " + rutaPrincipal.CalcularCosto());
-Console.WriteLine("Tiempo total: " + rutaPrincipal.CalcularTiempo());
+
+// ===============================
+// BUILDER
+// ===============================
+Console.WriteLine("\n=== BUILDER ===");
+
+IOrdenBuilder builderLocal = new OrdenLocal();
+builderLocal.generarId();
+builderLocal.añadirDescripcion();
+builderLocal.añadirDocumentacionAduanera();
+builderLocal.añadirSeguroTransito();
+
+OrdenDespacho ordenLocal = builderLocal.obtenerOrden();
+
+Console.WriteLine("Orden creada:");
+Console.WriteLine("ID: " + ordenLocal.id);
+Console.WriteLine("Descripción: " + ordenLocal.descripcion);
+Console.WriteLine("Aduana: " + ordenLocal.documentacionAduana);
+Console.WriteLine("Seguro: " + ordenLocal.seguroTransito);
+Console.WriteLine("Orden válida: " + ordenLocal.EsValida());
+
+
+// ===============================
+// OBSERVER
+// ===============================
+Console.WriteLine("\n=== OBSERVER ===");
+
+CentroDistribucion centro = new CentroDistribucion();
+
+IOperador operador1 = new OperadorCampo("Juan");
+IOperador supervisor1 = new Supervisor("María");
+
+centro.agregarOperador(operador1);
+centro.agregarOperador(supervisor1);
+
+centro.notificarOperador("Nuevo envío registrado en el centro de distribución.");
+
+
+// ===============================
+// CHAIN OF RESPONSIBILITY
+// ===============================
+Console.WriteLine("\n=== CHAIN OF RESPONSIBILITY ===");
+
+ManejadorIncidencia coordinador = new Coordinador();
+ManejadorIncidencia gerente = new Gerente();
+ManejadorIncidencia director = new Director();
+
+coordinador.SetSiguiente(gerente);
+gerente.SetSiguiente(director);
+
+Incidencia incidencia1 = new Incidencia(1, "Retraso menor en entrega local");
+Incidencia incidencia2 = new Incidencia(2, "Problema con documentación");
+Incidencia incidencia3 = new Incidencia(3, "Conflicto con cliente importante");
+Incidencia incidencia4 = new Incidencia(4, "Incidencia crítica internacional");
+
+coordinador.Manejar(incidencia1);
+coordinador.Manejar(incidencia2);
+coordinador.Manejar(incidencia3);
+coordinador.Manejar(incidencia4);
+
+Console.WriteLine("\n=== FIN DEL PROGRAMA ===");
