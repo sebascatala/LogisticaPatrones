@@ -1,4 +1,4 @@
-public class CentroDistribucion
+public class CentroDistribucion : ISujeto
 {
 
     private List<IOperador> Operadores = new List<IOperador>();
@@ -6,7 +6,7 @@ public class CentroDistribucion
     {
         Operadores.Add(op);
     }
-    public void elimiarOperador(IOperador op)
+    public void eliminarOperador(IOperador op)
     {
         Operadores.Remove(op);
     }
