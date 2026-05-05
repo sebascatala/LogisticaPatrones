@@ -1,81 +1,59 @@
-﻿Console.WriteLine("=== SISTEMA LOGÍSTICA PATRONES ===\n");
+﻿using System;
 
-// ===============================
-// FACTORY METHOD
-// ===============================
-Console.WriteLine("=== FACTORY METHOD ===");
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-CreadorEnvio creadorEstandar = new CreadorEstandar();
-Envio envioEstandar = creadorEstandar.CrearEnvio();
-Console.WriteLine("Envío creado: " + envioEstandar.GetType().Name);
+        bool salir = false;
 
-CreadorEnvio creadorRefrigerado = new CreadorRefrigerado();
-Envio envioRefrigerado = creadorRefrigerado.CrearEnvio();
-Console.WriteLine("Envío creado: " + envioRefrigerado.GetType().Name);
+        while (!salir)
+        {
+            Console.WriteLine("\n=== PRUEBA ABSTRACT FACTORY ===");
+            Console.WriteLine("1. Bolivia");
+            Console.WriteLine("2. Perú");
+            Console.WriteLine("3. Chile");
+            Console.WriteLine("0. Salir");
+            Console.Write("Seleccione un país: ");
 
-CreadorEnvio creadorValor = new CreadorValorDeclarado();
-Envio envioValor = creadorValor.CrearEnvio();
-Console.WriteLine("Envío creado: " + envioValor.GetType().Name);
+            string opcion = Console.ReadLine();
+            ConfiguracionPais fabrica = null;
 
+            switch (opcion)
+            {
+                case "1":
+                    fabrica = new Bolivia();
+                    break;
 
-// ===============================
-// BUILDER
-// ===============================
-Console.WriteLine("\n=== BUILDER ===");
+                case "2":
+                    fabrica = new Peru();
+                    break;
 
-IOrdenBuilder builderLocal = new OrdenLocal();
-builderLocal.generarId();
-builderLocal.añadirDescripcion();
-builderLocal.añadirDocumentacionAduanera();
-builderLocal.añadirSeguroTransito();
+                case "3":
+                    fabrica = new Chile();
+                    break;
 
-OrdenDespacho ordenLocal = builderLocal.obtenerOrden();
+                case "0":
+                    salir = true;
+                    continue;
 
-Console.WriteLine("Orden creada:");
-Console.WriteLine("ID: " + ordenLocal.id);
-Console.WriteLine("Descripción: " + ordenLocal.descripcion);
-Console.WriteLine("Aduana: " + ordenLocal.documentacionAduana);
-Console.WriteLine("Seguro: " + ordenLocal.seguroTransito);
-Console.WriteLine("Orden válida: " + ordenLocal.EsValida());
+                default:
+                    Console.WriteLine("Opción inválida.");
+                    continue;
+            }
 
+            // 🔥 Aquí se prueba el patrón
+            IVehiculo vehiculo = fabrica.CrearVehiculo();
+            IAlmacen almacen = fabrica.CrearAlmacen();
+            IEtiqueta etiqueta = fabrica.CrearEtiqueta();
 
-// ===============================
-// OBSERVER
-// ===============================
-Console.WriteLine("\n=== OBSERVER ===");
+            Console.WriteLine("\n--- CONFIGURACIÓN GENERADA ---");
+            Console.WriteLine("Vehículo: " + vehiculo.Describir());
+            Console.WriteLine("Almacén: " + almacen.Describir());
+            Console.WriteLine("Etiqueta: " + etiqueta.Describir());
 
-CentroDistribucion centro = new CentroDistribucion();
-
-IOperador operador1 = new OperadorCampo("Juan");
-IOperador supervisor1 = new Supervisor("María");
-
-centro.agregarOperador(operador1);
-centro.agregarOperador(supervisor1);
-
-centro.notificarOperador("Nuevo envío registrado en el centro de distribución.");
-
-
-// ===============================
-// CHAIN OF RESPONSIBILITY
-// ===============================
-Console.WriteLine("\n=== CHAIN OF RESPONSIBILITY ===");
-
-ManejadorIncidencia coordinador = new Coordinador();
-ManejadorIncidencia gerente = new Gerente();
-ManejadorIncidencia director = new Director();
-
-coordinador.SetSiguiente(gerente);
-gerente.SetSiguiente(director);
-
-Incidencia incidencia1 = new Incidencia(1, "Retraso menor en entrega local");
-Incidencia incidencia2 = new Incidencia(2, "Problema con documentación");
-Incidencia incidencia3 = new Incidencia(3, "Conflicto con cliente importante");
-Incidencia incidencia4 = new Incidencia(4, "Incidencia crítica internacional");
-
-coordinador.Manejar(incidencia1);
-coordinador.Manejar(incidencia2);
-coordinador.Manejar(incidencia3);
-coordinador.Manejar(incidencia4);
-
-
-Console.WriteLine("\n=== FIN DEL PROGRAMA ===");
+            Console.WriteLine("\n✔ Todos los elementos pertenecen al mismo país");
+        }
+    }
+}

@@ -20,4 +20,9 @@ public class OrdenAltoValor : IOrdenBuilder {
     }
 
     public OrdenDespacho obtenerOrden() => _orden;
+
+    public void asignarRuta(IComponenteRuta ruta)
+    {
+        throw new NotImplementedException();
+    }
 }
