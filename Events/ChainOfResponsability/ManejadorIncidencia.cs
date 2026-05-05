@@ -1,4 +1,4 @@
-public abstract class ManejadorIncidencia
+public abstract class ManejadorIncidencia:IOperador
 {
     protected ManejadorIncidencia siguiente;
 
@@ -7,4 +7,9 @@ public abstract class ManejadorIncidencia
         siguiente = s;   
     }
     public abstract void Manejar(Incidencia incidencia);
+
+    public void Actualizar(string mensaje)
+    {
+        Console.WriteLine($"[{this.GetType().Name}] Notificación recibida: {mensaje}");
+    }
 }

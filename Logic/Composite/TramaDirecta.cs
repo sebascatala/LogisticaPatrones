@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LogisticaPatrones.Logic.Composite
+﻿internal class TramaDirecta : IComponenteRuta
 {
-    internal class TramaDirecta : IComponenteRuta
+    public string Nombre { get; set; }
+    public double Costo { get; set; }
+    public double Tiempo { get; set; }
+
+    public TramaDirecta(string nombre, double costo, double tiempo)
     {
-        public string Nombre { get; set; }
-        public double Costo { get; set; }
-        public double Tiempo { get; set; }
-
-        public TramaDirecta(string nombre, double costo, double tiempo)
-        {
-            Nombre = nombre;
-            Costo = costo;
-            Tiempo = tiempo;
-        }
+        Nombre = nombre;
+        Costo = costo;
+        Tiempo = tiempo;
+    }
 
 
 
-        public double CalcularCosto()
-        {
-            return Costo;
-        }
+    public double CalcularCosto()
+    {
+        return Costo;
+    }
 
-        public double CalcularTiempo()
-        {
-            return Tiempo;
-        }
+    public double CalcularTiempo()
+    {
+        return Tiempo;
     }
 }
