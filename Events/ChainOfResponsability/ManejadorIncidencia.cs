@@ -1,6 +1,6 @@
 public abstract class ManejadorIncidencia:IOperador
 {
-    protected ManejadorIncidencia siguiente;
+    protected ManejadorIncidencia? siguiente;
 
     public void SetSiguiente(ManejadorIncidencia s)
     {
@@ -10,6 +10,6 @@ public abstract class ManejadorIncidencia:IOperador
 
     public void Actualizar(string mensaje)
     {
-        Console.WriteLine($"[{this.GetType().Name}] Notificación recibida: {mensaje}");
+        Console.WriteLine($"[{GetType().Name}] Notificación recibida: {mensaje}");
     }
 }

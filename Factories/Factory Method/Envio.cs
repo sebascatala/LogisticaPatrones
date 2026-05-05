@@ -7,7 +7,7 @@ public abstract class Envio
     public double CantidadEnviosMensuales { get; set; } = 0.0; // Para uso en EstrategiaCorporativa
     
     // Conexión con el sistema de cálculo de costos (Patrón Strategy)
-    protected CalcularCosto calculador;
+    protected CalcularCosto? calculador;
 
     public void SetCalculador(CalcularCosto calculador) {
         this.calculador = calculador;

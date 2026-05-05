@@ -10,7 +10,7 @@ public class OrdenAltoValor : IOrdenBuilder {
     }
 
     public void añadirDocumentacionAduanera() {
-        // El enunciado dice que si cruza fronteras (internacional) lleva esto, pero para el ejemplo lo asignamos siempre porque es un requisito de alto valor
+        // El enunciado dice que si cruza fronteras lleva esto, pero para el ejemplo lo asignamos siempre porque es un requisito de alto valor
         _orden.asignarAduana("Declaración de valor y permisos especiales.");
     }
 
@@ -20,4 +20,9 @@ public class OrdenAltoValor : IOrdenBuilder {
     }
 
     public OrdenDespacho obtenerOrden() => _orden;
+
+    public void asignarRuta(IComponenteRuta ruta)
+    {
+        throw new NotImplementedException();
+    }
 }
