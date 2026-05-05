@@ -2,7 +2,7 @@ public class Supervisor:IOperador
 {
     private string nombre;
 
-    public string Supervisor(string nombre)
+    public  Supervisor(string nombre)
     {
         this.nombre = nombre;
     }

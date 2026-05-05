@@ -10,7 +10,7 @@ public class CentroDistribucion
     {
         Operadores.Remove(op);
     }
-    public void notificarOperador()
+    public void notificarOperador(string mensaje)
     {
         foreach(var op in Operadores)
         {
