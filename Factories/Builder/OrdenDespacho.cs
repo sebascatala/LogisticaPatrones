@@ -2,6 +2,7 @@ public class OrdenDespacho {
     public string id = string.Empty;
     public string descripcion = string.Empty;
     public string instruccionesManejo = string.Empty;
+    public IComponenteRuta RutaAsignada { get; set; }
     public string documentacionAduana = string.Empty;
     public string seguroTransito = string.Empty;
 

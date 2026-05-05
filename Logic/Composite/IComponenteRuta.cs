@@ -1,4 +1,4 @@
-﻿interface IComponenteRuta
+﻿public interface IComponenteRuta
 {
     string Nombre { get; set; }
     double CalcularCosto();
