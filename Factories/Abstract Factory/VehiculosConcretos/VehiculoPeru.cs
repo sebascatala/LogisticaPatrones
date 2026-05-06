@@ -1,4 +1,7 @@
 public class VehiculoPeru : IVehiculo
 {
-    // Implementación específica para Perú
+    public string Describir()
+    {
+        return "Vehículo de operación peruana";
+    }
 }
