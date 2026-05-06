@@ -9,7 +9,7 @@ public class Director : ManejadorIncidencia
         Console.WriteLine($"Director recibido actualización: {mensaje}");
     }
 
-    public override void Manejar(Incidencia incidencia)
+    public void generarOrden()
     {
         if (incidencia.Nivel >= 3)
         {
