@@ -29,8 +29,9 @@ public class Director : ManejadorIncidencia
         Console.WriteLine("--- Director: Generando Solución Logística Integral ---");
 
         // 1. Uso de Abstract Factory: Configurar infraestructura local
-        _paisCfg.crearVehiculo();
-        _paisCfg.crearAlmacen();
+        _paisCfg.CrearVehiculo();
+        _paisCfg.CrearAlmacen();
+        _paisCfg.CrearEtiqueta();
         Console.WriteLine(" > Configurada infraestructura local.");
 
         // 2. Uso de Factory Method: Crear el objeto de envío específico

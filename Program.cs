@@ -62,10 +62,10 @@ Console.WriteLine("\n=== CHAIN OF RESPONSIBILITY ===");
 
 ManejadorIncidencia coordinador = new Coordinador();
 ManejadorIncidencia gerente = new Gerente();
-ManejadorIncidencia director = new Director();
+//ManejadorIncidencia director = new Director();
 
 coordinador.SetSiguiente(gerente);
-gerente.SetSiguiente(director);
+//gerente.SetSiguiente(director);
 
 Incidencia incidencia1 = new Incidencia(1, "Retraso menor en entrega local");
 Incidencia incidencia2 = new Incidencia(2, "Problema con documentación");
