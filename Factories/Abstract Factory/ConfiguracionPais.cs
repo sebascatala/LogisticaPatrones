@@ -1,10 +1,7 @@
 public abstract class ConfiguracionPais
 {
-    public void crearVehiculo() {
-    }
-    public void crearAlmacen(){
-        
-    }
-    public void crearEtiqueta() {
-    }
+    public abstract IVehiculo CrearVehiculo();
+    public abstract IAlmacen CrearAlmacen();
+    public abstract IEtiqueta CrearEtiqueta();
+
 }

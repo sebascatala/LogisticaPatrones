@@ -1,25 +1,81 @@
-﻿// 1. Instanciar los componentes de creación para el Director
-IOrdenBuilder miBuilder = new OrdenAltoValor();
-CreadorEnvio miFactory = new CreadorRefrigerado();
-ConfiguracionPais miPais = new Bolivia();
+Console.WriteLine("=== SISTEMA LOGÍSTICA PATRONES ===\n");
 
-// 2. Crear los eslabones de la cadena azul
-Coordinador coordinador = new Coordinador();
-Gerente gerente = new Gerente();
-Director director = new Director(miBuilder, miFactory, miPais);
+// ===============================
+// FACTORY METHOD
+// ===============================
+Console.WriteLine("=== FACTORY METHOD ===");
 
-// 3. Construir la cadena usando el método público para enlazar los manejadores
+CreadorEnvio creadorEstandar = new CreadorEstandar();
+Envio envioEstandar = creadorEstandar.CrearEnvio();
+Console.WriteLine("Envío creado: " + envioEstandar.GetType().Name);
+
+CreadorEnvio creadorRefrigerado = new CreadorRefrigerado();
+Envio envioRefrigerado = creadorRefrigerado.CrearEnvio();
+Console.WriteLine("Envío creado: " + envioRefrigerado.GetType().Name);
+
+CreadorEnvio creadorValor = new CreadorValorDeclarado();
+Envio envioValor = creadorValor.CrearEnvio();
+Console.WriteLine("Envío creado: " + envioValor.GetType().Name);
+
+
+// ===============================
+// BUILDER
+// ===============================
+Console.WriteLine("\n=== BUILDER ===");
+
+IOrdenBuilder builderLocal = new OrdenLocal();
+builderLocal.generarId();
+builderLocal.añadirDescripcion();
+builderLocal.añadirDocumentacionAduanera();
+builderLocal.añadirSeguroTransito();
+
+OrdenDespacho ordenLocal = builderLocal.obtenerOrden();
+
+Console.WriteLine("Orden creada:");
+Console.WriteLine("ID: " + ordenLocal.id);
+Console.WriteLine("Descripción: " + ordenLocal.descripcion);
+Console.WriteLine("Aduana: " + ordenLocal.documentacionAduana);
+Console.WriteLine("Seguro: " + ordenLocal.seguroTransito);
+Console.WriteLine("Orden válida: " + ordenLocal.EsValida());
+
+
+// ===============================
+// OBSERVER
+// ===============================
+Console.WriteLine("\n=== OBSERVER ===");
+
+CentroDistribucion centro = new CentroDistribucion();
+
+IOperador operador1 = new OperadorCampo("Juan");
+IOperador supervisor1 = new Supervisor("María");
+
+centro.agregarOperador(operador1);
+centro.agregarOperador(supervisor1);
+
+centro.notificarOperador("Nuevo envío registrado en el centro de distribución.");
+
+
+// ===============================
+// CHAIN OF RESPONSIBILITY
+// ===============================
+Console.WriteLine("\n=== CHAIN OF RESPONSIBILITY ===");
+
+ManejadorIncidencia coordinador = new Coordinador();
+ManejadorIncidencia gerente = new Gerente();
+ManejadorIncidencia director = new Director();
+
 coordinador.SetSiguiente(gerente);
 gerente.SetSiguiente(director);
 
-// 4. Iniciar el Cliente
-Cliente miCliente = new Cliente(coordinador);
+Incidencia incidencia1 = new Incidencia(1, "Retraso menor en entrega local");
+Incidencia incidencia2 = new Incidencia(2, "Problema con documentación");
+Incidencia incidencia3 = new Incidencia(3, "Conflicto con cliente importante");
+Incidencia incidencia4 = new Incidencia(4, "Incidencia crítica internacional");
 
-// Caso 1: Lo resuelve el Coordinador (Nivel <= 1)
-miCliente.ProcesarIncidencia("Error menor en pesaje", 1);
+coordinador.Manejar(incidencia1);
+coordinador.Manejar(incidencia2);
+coordinador.Manejar(incidencia3);
+coordinador.Manejar(incidencia4);
 
-Console.WriteLine();
 
-// Caso 2: Escala hasta el Director (Nivel >= 3)
-// El Director usará el Builder, Factory Method y Abstract Factory
-miCliente.ProcesarIncidencia("Emergencia logística nacional", 3);
+Console.WriteLine("\n=== FIN DEL PROGRAMA ===");
