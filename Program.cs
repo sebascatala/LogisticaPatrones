@@ -1,4 +1,4 @@
-Console.WriteLine("=== SISTEMA LOGÍSTICA PATRONES ===\n");
+﻿Console.WriteLine("=== SISTEMA LOGÍSTICA PATRONES ===\n");
 
 // ===============================
 // FACTORY METHOD
@@ -46,13 +46,13 @@ Console.WriteLine("\n=== OBSERVER ===");
 
 CentroDistribucion centro = new CentroDistribucion();
 
-IOperador operador1 = new OperadorCampo("Juan");
-IOperador supervisor1 = new Supervisor("María");
+//IOperador operador1 = new OperadorCampo();
+//IOperador supervisor1 = new Supervisor();
 
-centro.agregarOperador(operador1);
-centro.agregarOperador(supervisor1);
+//centro.agregarOperador(operador1);
+//centro.agregarOperador(supervisor1);
 
-centro.notificarOperador("Nuevo envío registrado en el centro de distribución.");
+//centro.notificarOperador("Nuevo envío registrado en el centro de distribución.");
 
 
 // ===============================
@@ -60,9 +60,10 @@ centro.notificarOperador("Nuevo envío registrado en el centro de distribución.
 // ===============================
 Console.WriteLine("\n=== CHAIN OF RESPONSIBILITY ===");
 
-ManejadorIncidencia coordinador = new Coordinador();
-ManejadorIncidencia gerente = new Gerente();
-ManejadorIncidencia director = new Director();
+ConfiguracionPais configPais = new Chile(); // Usa una implementación concreta de ConfiguracionPais
+ManejadorIncidencia coordinador = new Coordinador(new OrdenLocal(), new CreadorEstandar(), configPais);
+ManejadorIncidencia gerente = new Gerente(new OrdenLocal(), new CreadorEstandar(), configPais);
+ManejadorIncidencia director = new Director(new OrdenLocal(), new CreadorEstandar(), configPais);
 
 coordinador.SetSiguiente(gerente);
 gerente.SetSiguiente(director);

@@ -1,5 +1,9 @@
 public class Gerente:ManejadorIncidencia
 {
+    public Gerente(IOrdenBuilder builder, CreadorEnvio creador, ConfiguracionPais paisCfg) : base(builder, creador, paisCfg)
+    {
+    }
+
     public override void Manejar(Incidencia incidencia)
     {
         if(incidencia.Nivel <= 2)

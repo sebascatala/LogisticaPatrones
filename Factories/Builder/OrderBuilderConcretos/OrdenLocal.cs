@@ -15,9 +15,5 @@ public class OrdenLocal : IOrdenBuilder {
 
     public OrdenDespacho obtenerOrden() { return orden; }
 
-    public void asignarRuta(IComponenteRuta ruta)
-    {
-        throw new NotImplementedException();
-    }
 }
 

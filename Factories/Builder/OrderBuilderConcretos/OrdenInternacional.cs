@@ -15,8 +15,5 @@ public class OrdenInternacional : IOrdenBuilder {
 
     public OrdenDespacho obtenerOrden() { return orden; }
 
-    public void asignarRuta(IComponenteRuta ruta)
-    {
-        throw new NotImplementedException();
-    }
+
 }

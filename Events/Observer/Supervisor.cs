@@ -1,13 +1,12 @@
-public class Supervisor:IOperador
+public abstract class Supervisor : IOperador
 {
-    private string nombre;
+    private string nombre = "Supervisor General"; // Puedes asignar un nombre por defecto o pasarlo por el constructor
 
-    public  Supervisor(string nombre)
+    protected Supervisor(IOrdenBuilder builder, CreadorEnvio creador, ConfiguracionPais paisCfg) :base(builder, creador, paisCfg)
     {
-        this.nombre = nombre;
     }
 
-    public void Actualizar(string mensaje)
+    public override void Actualizar(string mensaje)
     {
         Console.WriteLine($"Supervisor {nombre} recibió: {mensaje}");
     }
