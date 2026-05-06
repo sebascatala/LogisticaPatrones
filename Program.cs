@@ -46,13 +46,13 @@ Console.WriteLine("\n=== OBSERVER ===");
 
 CentroDistribucion centro = new CentroDistribucion();
 
-//IOperador operador1 = new OperadorCampo();
-//IOperador supervisor1 = new Supervisor();
+IOperador operador1 = new OperadorCampo(new OrdenLocal(), new CreadorEstandar(), new Chile());
+IOperador supervisor1 = new Supervisor(new OrdenLocal(), new CreadorEstandar(), new Chile());
 
-//centro.agregarOperador(operador1);
-//centro.agregarOperador(supervisor1);
+centro.agregarOperador(operador1);
+centro.agregarOperador(supervisor1);
 
-//centro.notificarOperador("Nuevo envío registrado en el centro de distribución.");
+centro.notificarOperador("Nuevo envío registrado en el centro de distribución.");
 
 
 // ===============================
@@ -77,6 +77,66 @@ coordinador.Manejar(incidencia1);
 coordinador.Manejar(incidencia2);
 coordinador.Manejar(incidencia3);
 coordinador.Manejar(incidencia4);
+
+// ===============================
+// COMPOSITE
+// ===============================
+Console.WriteLine("\n=== COMPOSITE ===");
+
+// Creamos tramos simples (Hojas)
+TramaDirecta tramo1 = new TramaDirecta("Tramo La Paz - Oruro", 150.0, 3.5);
+TramaDirecta tramo2 = new TramaDirecta("Tramo Oruro - Potosí", 200.0, 4.0);
+
+// Creamos la ruta compuesta (Composite)
+RutaCompuesta rutaBolivia = new RutaCompuesta("Ruta Bolivia");
+rutaBolivia.AñadirTramo(tramo1);
+rutaBolivia.AñadirTramo(tramo2);
+
+Console.WriteLine($"Ruta: {rutaBolivia.Nombre}");
+Console.WriteLine($"Costo Base Acumulado: {rutaBolivia.CalcularCosto()} Bs.");
+Console.WriteLine($"Tiempo Total Estimado: {rutaBolivia.CalcularTiempo()} hrs.");
+
+// ===============================
+// ABSTRACT FACTORY
+// ===============================
+
+Console.WriteLine("\n=== ABSTRACT FACTORY ===");
+
+// 1. Instanciamos la fábrica concreta (Chile)
+// En este diseño, ConfiguracionPais es la Abstract Factory
+ConfiguracionPais fabricaPais = new Chile(); 
+
+// 2. Creamos la "Familia de Productos" relacionada con Chile
+// Cada método devuelve un objeto específico para la logística de ese país
+var etiqueta = fabricaPais.CrearEtiqueta();
+var vehiculo = fabricaPais.CrearVehiculo();
+var almacen  = fabricaPais.CrearAlmacen();
+
+
+//Console.WriteLine($"Operando en: {configPaisActual.NombrePais}");
+
+// ===============================
+// STRATEGY
+// ===============================
+Console.WriteLine("\n=== STRATEGY ===");
+
+// 1. Preparamos el calculador
+CalcularCosto motorCalculo = new CalcularCosto();
+
+// 2. Le asignamos la ruta (Composite) al envío (Factory Method)
+envioEstandar.componenteRuta = rutaBolivia;
+envioEstandar.peso = 25.5;
+
+// 3. Aplicamos diferentes estrategias al mismo envío
+Console.WriteLine("--- Calculando con Estrategia Estándar ---");
+motorCalculo.SetEstrategia(new EstrategiaEstandar());
+envioEstandar.SetCalculador(motorCalculo);
+Console.WriteLine($"Costo Final: {envioEstandar.ProcesarCosto()} Bs.");
+
+Console.WriteLine("--- Calculando con Estrategia Corporativa (Descuento) ---");
+motorCalculo.SetEstrategia(new EstrategiaCorporativa());
+envioEstandar.CantidadEnviosMensuales = 150; // Para activar el descuento
+Console.WriteLine($"Costo Final: {envioEstandar.ProcesarCosto()} Bs.");
 
 
 Console.WriteLine("\n=== FIN DEL PROGRAMA ===");

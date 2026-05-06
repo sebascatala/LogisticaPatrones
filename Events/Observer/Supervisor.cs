@@ -1,8 +1,8 @@
-public abstract class Supervisor : IOperador
+public class Supervisor : IOperador
 {
     private string nombre = "Supervisor General"; // Puedes asignar un nombre por defecto o pasarlo por el constructor
 
-    protected Supervisor(IOrdenBuilder builder, CreadorEnvio creador, ConfiguracionPais paisCfg) :base(builder, creador, paisCfg)
+    public Supervisor(IOrdenBuilder builder, CreadorEnvio creador, ConfiguracionPais paisCfg) :base(builder, creador, paisCfg)
     {
     }
 
