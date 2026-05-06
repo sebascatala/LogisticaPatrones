@@ -2,9 +2,9 @@
 {
     public double Calcular(Envio envio)
     {
-        double costoBase = (envio.distancia * 0.4) + (envio.peso * 1.5);
+        double costoBase = (envio.distancia * 0.4) + (envio.peso * 1.5)+ envio.componenteRuta?.CalcularCosto() ?? 0.0;
 
-        double descuento = 0;
+        double descuento = 0.2; // Descuento base para clientes corporativos
 
         if (envio.CantidadEnviosMensuales > 100)
             descuento = 0.20;

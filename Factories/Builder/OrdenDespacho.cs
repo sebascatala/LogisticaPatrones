@@ -1,4 +1,5 @@
 public class OrdenDespacho {
+
     public string id = string.Empty;
     public string descripcion = string.Empty;
     public string instruccionesManejo = string.Empty;
@@ -7,10 +8,11 @@ public class OrdenDespacho {
     public string seguroTransito = string.Empty;
 
     public void asignarId(string id) { this.id = id; }
-    public void asignarDescripcion(string desc) { this.descripcion = desc; }
-    public void asignarInstruccion(string inst) { this.instruccionesManejo = inst; }
-    public void asignarAduana(string doc) { this.documentacionAduana = doc; }
-    public void asignarSeguro(string seg) { this.seguroTransito = seg; }
+    public void asignarDescripcion(string desc) { descripcion = desc; }
+    public void asignarInstruccion(string inst) { instruccionesManejo = inst; }
+    public void asignarAduana(string doc) { documentacionAduana = doc; }
+    public void asignarSeguro(string seg) { seguroTransito = seg; }
+  
     public bool EsValida() {
         // Lógica de negocio: Toda orden DEBE tener ID y Descripción
         return !string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(descripcion);

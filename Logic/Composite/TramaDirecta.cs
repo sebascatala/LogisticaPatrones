@@ -10,9 +10,6 @@
         Costo = costo;
         Tiempo = tiempo;
     }
-
-
-
     public double CalcularCosto()
     {
         return Costo;

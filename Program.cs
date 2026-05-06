@@ -60,11 +60,11 @@ centro.notificarOperador("Nuevo envío registrado en el centro de distribución.
 // ===============================
 Console.WriteLine("\n=== CHAIN OF RESPONSIBILITY ===");
 
-ManejadorIncidencia coordinador = new Coordinador();
-ManejadorIncidencia gerente = new Gerente();
+//ManejadorIncidencia coordinador = new Coordinador();
+//ManejadorIncidencia gerente = new Gerente();
 //ManejadorIncidencia director = new Director();
 
-coordinador.SetSiguiente(gerente);
+//coordinador.SetSiguiente(gerente);
 //gerente.SetSiguiente(director);
 
 Incidencia incidencia1 = new Incidencia(1, "Retraso menor en entrega local");
@@ -72,10 +72,10 @@ Incidencia incidencia2 = new Incidencia(2, "Problema con documentación");
 Incidencia incidencia3 = new Incidencia(3, "Conflicto con cliente importante");
 Incidencia incidencia4 = new Incidencia(4, "Incidencia crítica internacional");
 
-coordinador.Manejar(incidencia1);
-coordinador.Manejar(incidencia2);
-coordinador.Manejar(incidencia3);
-coordinador.Manejar(incidencia4);
+//coordinador.Manejar(incidencia1);
+//coordinador.Manejar(incidencia2);
+//coordinador.Manejar(incidencia3);
+//coordinador.Manejar(incidencia4);
 
 
 Console.WriteLine("\n=== FIN DEL PROGRAMA ===");
