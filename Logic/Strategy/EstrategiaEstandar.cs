@@ -8,7 +8,9 @@
         // Obtenemos el costo base de la ruta (sea simple o compuesta)
         double costoBase = envio.componenteRuta?.CalcularCosto() ?? 0.0;
         
+        Console.WriteLine($"Estrategia Estandar: Costo sin ruta {costoBase} Bs., Costo con la ruta: {costoBase - envio.componenteRuta?.CalcularCosto() ?? 0.0}%");
+        
         // Aplicamos lógica de peso (por ejemplo, $2 por kilo)
-        return costoBase + (envio.distancia * tarifaKm) + costoPeso;
+        return costoBase  + costoPeso + (envio.componenteRuta?.CalcularCosto() ?? 0.0 * tarifaKm);
     }
 }
