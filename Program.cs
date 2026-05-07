@@ -111,6 +111,9 @@ ConfiguracionPais fabricaPais = new Chile();
 var etiqueta = fabricaPais.CrearEtiqueta();
 var vehiculo = fabricaPais.CrearVehiculo();
 var almacen  = fabricaPais.CrearAlmacen();
+Console.WriteLine($"Etiqueta: {etiqueta.Describir()}");
+Console.WriteLine($"Vehículo: {vehiculo.Describir()}");
+Console.WriteLine($"Almacén: {almacen.Describir()}");
 
 
 //Console.WriteLine($"Operando en: {configPaisActual.NombrePais}");
